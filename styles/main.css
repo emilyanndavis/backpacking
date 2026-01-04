@@ -1,0 +1,487 @@
+/*
+Backpacking, a Degree Progress Tracker
+Copyright (C) 2026 Emily Davis
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Lexend+Giga:wght@100..900&display=swap');
+
+:root {
+    --text-primary: #050505;
+    --body-padding-left-right: 1rem;
+    --body-padding-top-bottom: 1rem;
+    --main-max-width: 42rem;
+    --main-padding-left-right: 1rem;
+}
+
+body {
+  background: conic-gradient(
+    from 7deg,
+    var(--bg-color-1) 3deg,
+    var(--bg-color-2) 3deg 7deg,
+    var(--bg-color-3) 7deg 20deg,
+    var(--bg-color-4) 20deg 180deg,
+    var(--bg-color-5) 180deg
+  );
+  color: var(--text-primary);
+  font-family: 'Lexend Deca', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  height: 100%;
+  line-height: 1.5;
+  margin: 0;
+  overflow-x: hidden;
+  padding: var(--body-padding-top-bottom) var(--body-padding-left-right);
+  word-break: break-word;
+}
+
+main,
+footer {
+  box-sizing: border-box;
+  margin: auto;
+  max-width: var(--main-max-width);
+}
+
+main,
+.footer-section {
+  background: #fff;
+}
+
+main {
+  padding: 1rem var(--main-padding-left-right);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lexend Giga', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 900;
+}
+
+h1 {
+  color: var(--page-title-color);
+  font-size: 2rem;
+  letter-spacing: 5%;
+  margin: 0;
+  text-shadow:
+    0 1px var(--text-shadow-color-1),
+    -1px 0 var(--text-shadow-color-2),
+    -1px 2px var(--text-shadow-color-1),
+    -2px 1px var(--text-shadow-color-2),
+    -2px 3px var(--text-shadow-color-1),
+    -3px 2px var(--text-shadow-color-2),
+    -3px 4px var(--text-shadow-color-1),
+    -4px 3px var(--text-shadow-color-2),
+    -4px 5px var(--text-shadow-color-1),
+    -5px 4px var(--text-shadow-color-2),
+    -5px 6px var(--text-shadow-color-1),
+    -6px 5px var(--text-shadow-color-2),
+    -6px 7px var(--text-shadow-color-1),
+    -7px 6px var(--text-shadow-color-2),
+    -7px 8px var(--text-shadow-color-1),
+    -8px 7px var(--text-shadow-color-2);
+}
+
+h2 {
+  font-size: 1.375rem;
+  margin: 0.5em 0;
+}
+
+a {
+  border-bottom: 0.125rem solid var(--text-primary);
+  color: inherit;
+  text-decoration: none;
+  &:active,
+  &:focus,
+  &:hover,
+  &:visited {
+    color: inherit;
+  }
+
+  &:focus {
+    border: none;
+    border-radius: 0.125rem;
+    outline: 0.125rem solid var(--text-primary);
+    outline-offset: 0.0625rem;
+    transition: 75ms ease-in-out all;
+  }
+
+  &:hover {
+    border-bottom: 0.375rem double var(--text-primary);
+    transition: 75ms ease-in-out all;
+  }
+
+  &:focus:hover {
+    border-bottom: solid 0.125rem var(--text-primary);
+    outline-offset: 0.125rem;
+  }
+}
+
+dl > div {
+  display: flex;
+  justify-content: flex-start;
+
+  dt {
+    flex-shrink: 0;
+    font-weight: bold;
+  }
+
+  dd {
+    margin-left: 0.5rem;
+  }
+}
+
+.mountain-climbing-scene {
+  margin: -1rem 0 0 0;
+  position: relative;
+  height: calc(
+    100vw
+    - 2 * var(--body-padding-left-right)
+    - 2 * var(--main-padding-left-right)
+  );
+  max-height: calc(var(--main-max-width) - 2 * var(--main-padding-left-right));
+  width: 100%;
+
+  /* Mountain image includes whitespace surrounding mountain.
+      Define offsets inside mountain image to ensure proper positioning
+      of hiker with respect to mountain (not just mountain image). */
+  --mtn-offset-bottom: calc(7/30 * 100%);
+  --mtn-offset-left: calc(4/30 * 100%);
+  --mtn-height: calc(33/60 * 100%);
+  --half-mtn-width: calc(33/120 * 100%);
+
+  .mountain,
+  .hiker,
+  figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+
+  .mountain {
+    height: 100%;
+    width: 100%;
+  }
+
+  .hiker {
+    /* Hiker size should always be proportional to mountain size. */
+    --hiker-img-height: calc(5/40 * 100%);
+    --hiker-img-width: calc(5/40 * 100%);
+    height: var(--hiker-img-height);
+    width: var(--hiker-img-width);
+
+    /* Hiker image includes whitespace surrounding hiker.
+       Define offsets inside hiker image to ensure proper positioning
+       of hiker (not just hiker image) with respect to mountain. */
+    --hiker-offset-bottom: calc(11/60 * var(--hiker-img-height));
+    --hiker-offset-left: calc(7/30 * var(--hiker-img-height));
+    --hiker-width: calc(16/30 * var(--hiker-img-height));
+
+    /* Position hiker at base of mountain when progress is 0%. */
+    --start-offset-bottom: calc(
+      var(--mtn-offset-bottom)
+      - var(--hiker-offset-bottom)
+    );
+    --start-offset-left: calc(
+      var(--mtn-offset-left)
+      - var(--hiker-offset-left)
+      - var(--hiker-width)
+    );
+
+    /* Position hiker at top of mountain when progress is 100%. */
+    --end-offset-bottom: calc(
+      var(--mtn-offset-bottom)
+      + var(--mtn-height)
+      - var(--hiker-offset-bottom)
+    );
+    --end-offset-left: calc(
+      var(--mtn-offset-left)
+      - var(--hiker-offset-left)
+      - var(--hiker-offset-left)
+      + var(--half-mtn-width)
+    );
+
+    /* Calculate diffs between end offsets and start offsets.
+       These diffs will provide the basis for calculating hiker offsets
+       when progress is somewhere between 0 and 100%. */
+    --range-offset-bottom: calc(
+      var(--end-offset-bottom)
+      - var(--start-offset-bottom)
+    );
+    --range-offset-left: calc(
+      var(--end-offset-left)
+      - var(--start-offset-left)
+    );
+
+    /* Calculate hiker offsets based on actual progress.
+       (--progress-percent is defined in data and set in the HTML template.) */
+    bottom: calc(
+      var(--start-offset-bottom)
+      + (var(--progress-percent) / 100)
+      * var(--range-offset-bottom)
+    );
+    left: calc(
+      var(--start-offset-left)
+      + (var(--progress-percent) / 100)
+      * var(--range-offset-left)
+    );
+  }
+
+  figcaption {
+    top: calc(
+      100%
+      - var(--mtn-offset-bottom)
+      + 1rem
+    );
+    width: 100%;
+  }
+}
+
+.charts-css {
+  &.bar.course-status-chart {
+    --labels-size: 6.5rem;
+    height: 10rem;
+
+    tbody tr {
+      th {
+        align-items: flex-end;
+        padding-right: 0.5rem;
+      }
+      td {
+        font-size: 1.5rem;
+        font-weight: bold;
+        min-width: 1.75rem;
+        padding-right: 0.5rem;
+
+        &.zero-bar {
+          background: transparent;
+          color: var(--text-primary) !important;
+          min-width: unset;
+          padding: 0 0 0 1rem;
+        }
+      }
+    }
+  }
+}
+
+.course-list-section {
+  margin-top: 2rem;
+}
+
+.course-list {
+  list-style: none;
+  padding: 0;
+
+  li {
+    align-items: flex-start;
+    display: flex;
+    margin: 0.75rem 0;
+
+    .list-item-decorator {
+      border: 0.25rem solid var(--status-icon-color);
+      border-radius: 100%;
+      color: var(--status-icon-color);
+      flex-shrink: 0;
+      height: 2.5rem;
+      width: 2.5rem;
+      line-height: 1;
+      margin-right: 0.75rem;
+      text-align: center;
+    }
+
+    &.complete {
+      .list-item-decorator::before {
+        content: '✓';
+        font-size: 2.5rem;
+      }
+    }
+
+    &.in-progress {
+      .list-item-decorator::before {
+        content: '⋯';
+        font-size: 2.75rem;
+        font-weight: bold;
+        line-height: 2.375rem;
+      }
+    }
+
+    .list-item-content {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .list-item-content-line {
+      flex-basis: 100%;
+      &:not(:first-child) {
+        padding-left: 1.5rem;
+      }
+    }
+  }
+}
+
+footer {
+  font-size: 1rem;
+
+  .footer-section {
+    margin-top: var(--body-padding-top-bottom);
+    padding: 1rem var(--main-padding-left-right);
+  }
+
+  p {
+    margin: 1rem auto;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &:has(+ ul) {
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  .image-sources-list {
+    margin: 0;
+  }
+
+  .footer-text-standout {
+    font-size: 1.125rem;
+    border-style: solid;
+    border-width: 0.5rem;
+    border-color: var(--bg-color-2); /* fallback */
+    border-image-slice: 1;
+    border-image-source: conic-gradient(
+      from 235deg,
+      var(--bg-color-1) 30deg,
+      var(--bg-color-2) 30deg 100deg,
+      var(--bg-color-3) 100deg 180deg,
+      var(--bg-color-5) 180deg
+    );
+    padding: 0.75rem;
+  }
+}
+
+@media (width > 767px) {
+  :root {
+    --body-padding-top-bottom: 2rem;
+  }
+
+  body {
+    background: conic-gradient(
+      from 12deg,
+      var(--bg-color-1) 14deg,
+      var(--bg-color-2) 14deg 30deg,
+      var(--bg-color-3) 30deg 60deg,
+      var(--bg-color-4) 60deg 180deg,
+      var(--bg-color-5) 180deg
+    );
+    font-size: 1.25rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  .mountain-climbing-scene {
+    figcaption {
+      top: calc(
+        100%
+        - var(--mtn-offset-bottom)
+        + 2rem
+      );
+    }
+  }
+
+  .charts-css {
+    &.bar.course-status-chart {
+      --labels-size: 8rem;
+    }
+
+    tbody tr td {
+      min-width: 2.25rem;
+      padding-right: 0.75rem;
+    }
+  }
+
+  .status-list {
+    li {
+      align-items: center;
+
+      .list-item-decorator {
+        border: 0.375rem solid var(--status-icon-color);
+        height: 4rem;
+        width: 4rem;
+      }
+
+      &.complete {
+        .list-item-decorator::before {
+          font-size: 4rem;
+        }
+      }
+
+      &.in-progress {
+        .list-item-decorator::before {
+          font-size: 4.5rem;
+          line-height: 3.625rem;
+        }
+      }
+    }
+  }
+
+  footer {
+    .footer-text-standout {
+      border-image-source: conic-gradient(
+        from 250deg,
+        var(--bg-color-1) 20deg,
+        var(--bg-color-2) 20deg 50deg,
+        var(--bg-color-3) 50deg 185deg,
+        var(--bg-color-5) 185deg
+      );
+    }
+  }
+}
+
+@media (width > 439px) {
+  .mountain-climbing-scene {
+    margin-top: -2rem;
+    margin-bottom: -2rem;
+  }
+}
+
+@media (width > 489px) {
+  .mountain-climbing-scene {
+    margin-top: -3rem;
+    margin-bottom: -3rem;
+  }
+}
+
+@media (width > 649px) {
+  .mountain-climbing-scene {
+    margin-top: -4rem;
+    margin-bottom: -4rem;
+  }
+}
+
+@supports(padding: max(0px)) {
+  /* Ensure rounded screen corners & 'notches' don't obscure content */
+  body {
+      padding-left: max(var(--body-padding-left-right), env(safe-area-inset-left));
+      padding-right: max(var(--body-padding-left-right), env(safe-area-inset-right));
+  }
+}

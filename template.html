@@ -1,0 +1,229 @@
+<!--
+Backpacking, a Degree Progress Tracker
+Copyright (C) 2026 Emily Davis
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ pageTitle }}</title>
+  <link rel="stylesheet" href="./styles/charts.min.css">
+  <link rel="stylesheet" href="./styles/main.css">
+  <style>
+    :root {
+      --bg-color-1: {{ backgroundColors.color1 }};
+      --bg-color-2: {{ backgroundColors.color2 }};
+      --bg-color-3: {{ backgroundColors.color3 }};
+      --bg-color-4: {{ backgroundColors.color4 }};
+      --bg-color-5: {{ backgroundColors.color5 }};
+      --text-shadow-color-1: {{ textShadowColors.color1 }};
+      --text-shadow-color-2: {{ textShadowColors.color2 }};
+      --page-title-color: {{ pageTitleColor }};
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>{{ pageTitle }}</h1>
+    <section class="snapshot-section">
+      <h2>Degree Progress Snapshot</h2>
+      <dl>
+        <div>
+          <dt>Name:</dt>
+          <dd>{{ student.name }}</dd>
+        </div>
+        <div>
+          <dt>Degree:</dt>
+          <dd>{{ student.degree.level }} in {{ student.degree.name }}</dd>
+        </div>
+        <div>
+          <dt>School:</dt>
+          <dd>{{ student.degree.school }}</dd>
+        </div>
+      </dl>
+      <figure class="mountain-climbing-scene">
+        <svg
+          role="presentation" class="mountain"
+          width="700px" height="700px" version="1.1" viewBox="0 0 700 700"
+          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <g>
+            <path fill="{{ mountainSceneColors.mountain }}" d="m308.36 151.84c-1.4688-2.8125-4.375-4.5742-7.5469-4.582h-0.015625c-3.1602 0-6.0664 1.7461-7.543 4.5469l-194.26 367.68c-1.3984 2.6445-1.3086 5.8242 0.23437 8.3906 1.5391 2.5586 4.3164 4.125 7.3125 4.125h386.35c2.9844 0 5.7578-1.5586 7.3008-4.1094 1.5469-2.5586 1.6445-5.7305 0.26172-8.3711zm-7.6133 22.305 69.629 133.27c-0.46094 0.015625-0.92578 0.023437-1.3906 0.023437-10.773 0-20.961-4.1562-28.668-11.703-3.3164-3.2539-8.625-3.2539-11.938 0-7.7188 7.5469-17.891 11.703-28.672 11.703-10.773 0-20.957-4.1562-28.668-11.703-3.3203-3.2539-8.625-3.2539-11.945 0-7.7109 7.5469-17.891 11.703-28.672 11.703h-0.10547zm-180.05 340.78 100.96-191.08c2.8945 0.44141 5.8281 0.67188 8.7734 0.67188 12.621 0 24.672-4.0273 34.641-11.465 9.9688 7.4375 22.012 11.465 34.641 11.465 12.629 0 24.68-4.0273 34.641-11.465 9.9688 7.4375 22.008 11.465 34.637 11.465 3.3281 0 6.6289-0.29688 9.8789-0.85156l99.926 191.26z"/>
+            <path fill="{{ mountainSceneColors.sun }}" d="m507.32 74.418c-26.605 0-48.262 21.648-48.262 48.262 0 26.605 21.656 48.262 48.262 48.262 26.609 0 48.262-21.656 48.262-48.262-0.003906-26.605-21.645-48.262-48.262-48.262zm0 79.453c-17.199 0-31.188-13.996-31.188-31.188 0-17.199 13.996-31.191 31.188-31.191 17.203 0 31.191 13.996 31.191 31.191 0.003907 17.191-13.988 31.188-31.191 31.188z"/>
+            <path fill="{{ mountainSceneColors.sun }}" d="m507.32 66.672c4.7148 0 8.5352-3.8203 8.5352-8.5352l-0.003906-21.602c0.007813-4.7148-3.8164-8.5352-8.5312-8.5352-4.7109 0-8.5273 3.8203-8.5273 8.5352v21.605c-0.003906 4.7148 3.8203 8.5312 8.5273 8.5312z"/>
+            <path fill="{{ mountainSceneColors.sun }}" d="m455.64 83.074c1.668 1.668 3.8516 2.4961 6.0352 2.4961 2.1836 0 4.3672-0.83594 6.0352-2.4961 3.332-3.332 3.332-8.7344 0-12.074l-15.281-15.277c-3.3281-3.332-8.7344-3.332-12.066 0-3.3359 3.3359-3.3359 8.7344 0 12.074z"/>
+            <path fill="{{ mountainSceneColors.sun }}" d="m421.17 131.21h21.605c4.7148 0 8.5352-3.8203 8.5352-8.5352 0-4.7227-3.8203-8.5352-8.5352-8.5352h-21.605c-4.7148 0-8.5352 3.8203-8.5352 8.5352 0 4.7148 3.8242 8.5352 8.5352 8.5352z"/>
+            <path fill="{{ mountainSceneColors.sun }}" d="m440.37 189.63c1.6641 1.668 3.8516 2.4961 6.0352 2.4961s4.3672-0.83594 6.0312-2.4961l15.281-15.281c3.332-3.332 3.332-8.7344 0-12.066-3.3359-3.332-8.7344-3.332-12.074 0l-15.277 15.281c-3.332 3.332-3.332 8.7344 0.003907 12.066z"/>
+            <path fill="{{ mountainSceneColors.sun }}" d="m507.32 178.69c-4.7109 0-8.5273 3.8203-8.5273 8.5352v21.605c0 4.7148 3.8203 8.5352 8.5273 8.5352 4.7148 0 8.5352-3.8203 8.5352-8.5352v-21.605c0.003907-4.7188-3.8164-8.5352-8.5352-8.5352z"/>
+            <path fill="{{ mountainSceneColors.sun }}" d="m559 162.28c-3.3359-3.332-8.7422-3.332-12.074 0-3.3359 3.332-3.3359 8.7344 0 12.066l15.277 15.281c1.668 1.668 3.8516 2.4961 6.0352 2.4961s4.3672-0.83594 6.0352-2.4961c3.332-3.332 3.332-8.7344 0-12.066z"/>
+            <path fill="{{ mountainSceneColors.sun }}" d="m593.47 114.14h-21.605c-4.7109 0-8.5352 3.8203-8.5352 8.5352 0 4.7109 3.8242 8.5352 8.5352 8.5352h21.605c4.7109 0 8.5273-3.8203 8.5273-8.5352 0-4.7109-3.8203-8.5352-8.5273-8.5352z"/>
+            <path fill="{{ mountainSceneColors.sun }}" d="m552.96 85.574c2.1836 0 4.3672-0.83594 6.0312-2.4961l15.281-15.277c3.332-3.332 3.332-8.7344 0-12.074-3.332-3.332-8.7344-3.332-12.066 0l-15.281 15.277c-3.3359 3.3359-3.3359 8.7422-0.003906 12.074 1.6719 1.668 3.8477 2.4961 6.0391 2.4961z"/>
+          </g>
+        </svg>
+        <svg
+          role="img" class="hiker" style="--progress-percent: {{ percentComplete }}" aria-labelledby="hiker-img-title"
+          width="700pt" height="700pt" version="1.1" viewBox="0 0 700 700"
+          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <title id="hiker-img-title">{{ hikerAltText }}</title>
+          <g>
+            <path fill="{{ mountainSceneColors.hiker }}" d="m525.28 183.12c-6.1602-3.9219-14.559-1.6797-17.922 5.0391l-19.039 33.039c-3.3594-0.55859-6.7188-1.1211-10.078-1.1211-4.4805 0-9.5195 0.55859-14 2.2383-1.1211 0.55859-10.078 2.8008-21.281 2.8008-6.7188 0-12.879-1.1211-17.922-2.8008-3.9219-1.6797-7.2812-5.0391-9.5195-8.3984-1.6797-2.2383-3.3594-4.4805-5.6016-6.7188 12.879-3.3594 25.199-10.078 35.281-19.039 15.121-14 24.641-32.48 27.441-52.641l5.6016-0.55859c7.2812-0.55859 12.879-7.2812 12.32-14.559-0.55859-7.2812-7.2812-12.879-14.559-12.32l-4.4805 0.55859c-2.8008-14-8.3984-26.879-17.359-38.078l45.922-21.84c6.7188-3.3594 9.5195-11.199 6.1602-17.359-3.3594-6.1602-11.199-9.5195-17.359-6.1602l-47.602 21.84c-8.9609-11.762-22.398-22.961-44.238-22.961-14 0-30.238 4.4805-50.398 13.441-47.039 21.281-49.84 63.84-44.238 84.559-0.55859 15.68 3.3594 30.801 10.641 44.238l-22.961-10.641c-7.2812-13.441-20.719-23.52-36.961-25.762l-12.879-1.6797c-2.2383 0-3.9219-0.55859-6.1602-0.55859-24.641 0-45.359 18.48-48.719 43.121l-16.801 137.2c-0.55859 3.3594 0.55859 6.7188 2.8008 9.5195 2.2383 2.8008 5.6016 4.4805 8.9609 5.0391l75.602 9.5195-3.3594 33.602v0.55859c-1.6797 17.359-3.9219 30.238-8.3984 40.879l-21.281 50.398-14 28.559c-6.1602 13.441-1.1211 29.121 12.32 35.281 8.9609 4.4805 19.039 3.3594 26.879-2.2383 3.9219 9.5195 13.441 16.238 24.641 16.238h28c14.559 0 26.32-11.762 26.32-26.32s-11.762-26.32-26.32-26.32h-2.2383l30.801-73.922c11.762 1.1211 22.961 2.2383 29.121 2.8008 3.9219 2.8008 11.762 10.641 17.359 26.32l-39.199 75.602c-3.3594 6.7188-1.1211 14.559 5.6016 17.922 1.6797 1.1211 3.9219 1.6797 6.1602 1.6797 5.0391 0 9.5195-2.8008 11.762-7.2812l22.961-44.238v1.1211l5.0391 29.68c2.2383 12.879 13.441 21.84 26.32 21.84 1.6797 0 2.8008 0 4.4805-0.55859 8.9609-1.6797 16.238-7.2812 19.602-15.121 6.7188 7.8398 17.922 11.199 28 8.3984l22.398-6.7188c14-4.4805 21.84-19.039 17.359-33.039s-19.039-21.84-33.039-17.359l-5.0391 1.6797-7.8398-10.078v-3.3594c-2.8008-30.238-11.199-59.359-22.398-82.32l31.359-60.48c11.762-1.6797 20.16-4.4805 22.398-5.0391 11.762-3.9219 21.281-11.762 26.879-22.961 5.6016-11.199 6.7188-23.52 2.8008-35.281-2.2383-7.2812-6.1602-12.879-11.199-17.922l19.039-32.48c4.457-6.7188 2.2188-14.559-3.9414-18.477zm-218.4 10.078c-5.0391 2.8008-9.5195 6.1602-14 10.078l1.6797-15.68zm89.043 142.24-113.12-10.641 1.1211-10.078c7.8398 2.2383 20.16 4.4805 34.719 4.4805 18.48 0 40.32-3.9219 60.48-17.359 5.0391 2.8008 11.199 6.1602 19.039 8.3984zm25.199 12.879 2.8008-31.922c5.0391 0.55859 9.5195 0.55859 14.559 1.1211l-16.801 31.922s-0.55859-0.5625-0.55859-1.1211zm-5.6016-101.36c8.9609 3.3594 17.922 4.4805 26.32 4.4805l5.0391 39.762h-4.4805c-7.8398 0-15.68-0.55859-24.641-2.2383-18.48-3.9219-28-8.9609-32.48-11.199-1.1211-0.55859-1.6797-1.6797-2.8008-2.2383-4.4805-2.2383-10.078-2.2383-14 1.1211-30.801 24.078-71.68 14.559-82.879 11.199l2.2383-24.078c3.3633-30.809 31.363-56.57 62.723-56.57 17.922 0 33.602 8.3984 42.559 21.84 6.1641 8.4023 13.441 14.562 22.402 17.922zm30.801-117.04c-2.8008 30.801-28.559 53.762-58.801 53.762h-5.6016c-29.121-2.8008-51.52-26.32-53.199-54.879l99.68-47.043c12.32 12.316 19.602 29.68 17.922 48.16zm-124.88 252.56h-1.1211c-5.6016 0-10.078 3.3594-12.32 8.3984l-26.32 62.723c-0.55859-0.55859-1.1211-0.55859-2.2383-1.1211l-22.961-8.3984 11.199-26.879c6.7188-15.68 9.5195-32.48 10.641-49.281l1.6797-17.359 117.6 11.199c13.441 14 28.559 45.922 34.719 86.238l-26.32 4.4805c-8.3984-52.078-39.199-65.52-39.762-65.52-0.55859-0.5625-44.797-4.4805-44.797-4.4805zm162.4-96.879c-0.55859 0-4.4805 1.6797-10.641 2.8008l-5.0391-39.762c2.2383-0.55859 3.3594-1.1211 3.3594-1.1211 2.2383-0.55859 3.9219-1.1211 6.1602-1.1211 8.3984 0 16.238 5.6016 19.039 14 3.3594 10.641-2.2383 21.84-12.879 25.203z"/>
+            <path fill="{{ mountainSceneColors.hiker }}" d="m423.92 119.84c0 7.7305-6.2695 14-14 14-7.7344 0-14-6.2695-14-14 0-7.7305 6.2656-14 14-14 7.7305 0 14 6.2695 14 14"/>
+          </g>
+        </svg>
+        <figcaption>{{ progressMessage }}</figcaption>
+      </figure>
+    </section>
+    <section class="chart-section">
+      <h2 id="table-heading">Course Progress Summary</h2>
+      <table
+        class="course-status-chart charts-css bar show-labels data-spacing-3"
+        aria-labelledby="table-heading"
+      >
+        <tbody>
+          <tr>
+            <th scope="row">Complete</th>
+            <td
+              {{^numCoursesCompleted}}class="zero-bar"{{/numCoursesCompleted}}
+              style="
+                --size: {{ numCoursesCompleted }} / {{ maxBarLength }};
+                --color: {{ chartColors.complete.bg }};
+                color: {{ chartColors.complete.text }};
+              "
+            >
+              {{ numCoursesCompleted }}
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">In Progress</th>
+            <td
+              {{^numCoursesInProgress}}class="zero-bar"{{/numCoursesInProgress}}
+              style="
+                --size: {{ numCoursesInProgress }} / {{ maxBarLength }};
+                --color: {{ chartColors.inProgress.bg }};
+                color: {{ chartColors.inProgress.text }};
+              "
+            >
+              {{ numCoursesInProgress }}
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Incomplete</th>
+            <td
+              {{^numCoursesIncomplete}}class="zero-bar"{{/numCoursesIncomplete}}
+              style="
+                --size: {{ numCoursesIncomplete }} / {{ maxBarLength }};
+                --color: {{ chartColors.incomplete.bg }};
+                color: {{ chartColors.incomplete.text }};
+              "
+            >
+              {{ numCoursesIncomplete }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="course-list-section">
+      <h2 id="course-list-heading">Full Course List</h2>
+      <ul
+        role="list"
+        class="course-list"
+        aria-labelledby="course-list-heading"
+      >
+        {{#courseList}}
+        <li
+          class="{{ cssClass }}"
+          style="--status-icon-color: {{ iconColor }}"
+        >
+          <span class="list-item-decorator" aria-hidden="true"></span>
+          <span class="list-item-content">
+            <span
+              class="list-item-content-line"
+            >
+              {{ department }}
+              {{#number}}{{ number }}{{/number}}{{^number}}???{{/number}}: {{name}}
+              ({{ school }}, {{ credits }} credits)
+            </span>
+            <span class="list-item-content-line">
+              <span>{{ status }}</span>{{#term}}<span>, {{ term }}</span>{{/term}}
+              {{#year}}
+              <span>{{ year }}</span>
+              {{/year}}
+            </span>
+          </span>
+        </li>
+        {{/courseList}}
+      </ul>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-section">
+      <p>
+        <strong>Backpacking</strong>
+        is a degree progress tracker designed and built by
+        <a href="https://emilyanndavis.github.io/">Emily Davis</a>
+        with HTML, CSS,
+        <a href="https://chartscss.org/">Charts.css</a>,
+        and
+        <a href="https://github.com/janl/mustache.js">mustache.js</a>.
+        It was
+        {{#coAuthorName}}
+          customized by
+          {{#coAuthorURL}}<a href="{{ coAuthorURL }}">{{ coAuthorName }}</a>{{/coAuthorURL}}
+          {{^coAuthorURL}}{{ coAuthorName }}{{/coAuthorURL}}
+          and
+        {{/coAuthorName}}
+        last updated {{ lastUpdatedDate }}.
+      </p>
+      <p id="image-sources-heading">Images sourced from the Noun Project:</p>
+      <ul
+        role="list"
+        class="image-sources-list"
+        aria-labelledby="image-sources-heading"
+      >
+        <li>
+          <a
+            href="https://thenounproject.com/icon/mountain-1035090/"
+          >Mountain by abderraouf omara</a>, shared under the
+          <a
+            href="https://creativecommons.org/licenses/by/3.0/"
+          >Creative Commons Attribution License (CC BY 3.0)</a>.
+          Colors have been customized.
+        </li>
+        <li>
+          <a
+            href="https://thenounproject.com/icon/hiker-1264137/"
+          >Hiker by HeadsOfBirds</a>, shared under the
+          <a
+            href="https://creativecommons.org/licenses/by/3.0/"
+          >Creative Commons Attribution License (CC BY 3.0)</a>.
+          Color has been customized.
+        </li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <p class="footer-text-standout">
+        <strong>Want to use Backpacking to track your own degree progress?</strong>
+        <br />
+        Find out how by checking out
+        <a href="https://github.com/emilyanndavis/backpacking">Backpacking on GitHub</a>!
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
