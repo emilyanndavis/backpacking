@@ -128,7 +128,7 @@ export const courses = [
     number: 445,
     name: 'Intro to Deep Learning',
     credits: 4,
-    status: Status.inProgress,
+    status: Status.complete,
     term: Term.Spring,
     year: 2026,
   },
