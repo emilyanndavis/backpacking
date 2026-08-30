@@ -135,10 +135,12 @@ export const courses = [
   {
     school: Schools.CSU,
     department: Departments.CS,
-    number: 0,
-    name: 'Upper Division CS Elective',
+    number: 356,
+    name: 'Systems Security',
     credits: 3,
-    status: Status.incomplete,
+    status: Status.inProgress,
+    term: Term.Fall,
+    year: 2026,
   },
   {
     school: Schools.CSU,
